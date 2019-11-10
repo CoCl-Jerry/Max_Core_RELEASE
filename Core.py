@@ -38,6 +38,21 @@ while True:
             f.close()
             break
 
+        elif(CMD[0]=='B'):
+            with PiCamera() as camera:
+                camera.resolution = (350,350)
+                camera.zoom = (0.25,0.25,0.5,0.5)
+                sleep(4)
+                camera.capture("out.jpg")
+            f = open ("out.jpg", "rb")
+                
+            l = f.read(512)
+            while (l):
+                connection.send(l)
+                l = f.read(512)
+            f.close()
+            break
+
     connection.close()
     
 
