@@ -41,7 +41,7 @@ while True:
                     connection.send(l)
                     l = f.read(512)
                     i+=1
-                    print(i+"\n")
+                    print(str(i)+"\n")
                 f.close()
                 break
         except Exception as e:
