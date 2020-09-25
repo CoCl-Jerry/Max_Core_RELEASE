@@ -3,7 +3,7 @@ from time import sleep
 from picamera import PiCamera
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ip_address = "10.0.5.2"
+ip_address = "10.0.5.1"
 server_address = (ip_address, 23456)
 sock.bind(server_address)
 
