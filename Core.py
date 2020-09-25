@@ -40,7 +40,7 @@ while True:
                 while (l):
                     connection.send(l)
                     l = f.read(512)
-                    i++
+                    i+=1
                     print(i+"\n")
                 f.close()
                 break
