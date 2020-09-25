@@ -36,9 +36,12 @@ while True:
                 else:
                     f = open("out.png", "rb")
                 l = f.read(512)
+                i=0
                 while (l):
                     connection.send(l)
                     l = f.read(512)
+                    i++
+                    print(i+"\n")
                 f.close()
                 break
         except Exception as e:
