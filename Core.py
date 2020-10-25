@@ -26,7 +26,7 @@ while True:
 
             CMD = recieved.split('~', 9)
 
-            if CMD[0] == 'A':
+            if(CMD[0] == 'A'):
                 with PiCamera() as camera:
                     camera.resolution = (int(CMD[1]), int(CMD[2]))
                     camera._set_rotation(90 * int(CMD[3]))
@@ -39,7 +39,7 @@ while True:
                     else:
                         camera.capture("out.png")
 
-                if int(CMD[8]) == 1:
+                if(int(CMD[8]) == 1):
                     f = open("out.jpg", "rb")
                 else:
                     f = open("out.png", "rb")
@@ -50,9 +50,9 @@ while True:
                 f.close()
                 print("transmit complete")
                 break
-            if CMD[0] == 'B':
-                pwm.ChangeDutyCycle(int(CMD[1]))
-
+            if(CMD[0] == 'B'):
+                pwm.ChangeDutyCycle(int(CMD[1])
+                
         except Exception as e:
             print(e)
 
