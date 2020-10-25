@@ -51,6 +51,10 @@ while True:
                 print("transmit complete")
                 break
 
+            if CMD[0] == 'B':
+                pwm.ChangeDutyCycle(int(CMD[1]))
+                break
+
         except Exception as e:
             print(e)
 
