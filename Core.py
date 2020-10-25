@@ -1,6 +1,13 @@
 import socket
+import RPi.GPIO as GPIO
 from time import sleep
 from picamera import PiCamera
+
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(12, GPIO.OUT)
+pwm = GPIO.PWM(12, 100)
+pwm.start(50)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ip_address = "10.0.5.1"
@@ -43,6 +50,9 @@ while True:
                 f.close()
                 print("transmit complete")
                 break
+            if(CMD[0] == 'B'):
+                pwm.ChangeDutyCycle(int(CMD[1])
+                
         except Exception as e:
             print(e)
 
