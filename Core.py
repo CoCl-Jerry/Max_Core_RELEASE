@@ -1,9 +1,16 @@
 import socket
+import RPi.GPIO as GPIO
 from time import sleep
 from picamera import PiCamera
 
+GPIO.setmode(GPIO.BOARD)
+
+GPIO.setup(12, GPIO.OUT)
+pwm = GPIO.PWM(12, 100)
+pwm.start(50)
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ip_address = "10.0.5.2"
+ip_address = "10.0.5.1"
 server_address = (ip_address, 23456)
 sock.bind(server_address)
 
@@ -26,6 +33,7 @@ while True:
                     camera.zoom = (
                         int(CMD[4]) / 100, int(CMD[5]) / 100, int(CMD[6]) / 100, int(CMD[7]) / 100)
                     sleep(2)
+                    print("imaging...")
                     if(int(CMD[8]) == 1):
                         camera.capture("out.jpg")
                     else:
@@ -40,7 +48,13 @@ while True:
                     connection.send(l)
                     l = f.read(512)
                 f.close()
+                print("transmit complete")
                 break
+
+            if CMD[0] == 'B':
+                pwm.ChangeDutyCycle(int(CMD[1]))
+                break
+
         except Exception as e:
             print(e)
 
