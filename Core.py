@@ -1,5 +1,6 @@
 import socket
 import RPi.GPIO as GPIO
+from time import sleep
 from picamera2 import Picamera2
 from libcamera import controls
 
@@ -67,7 +68,7 @@ while True:
                     capture_file = "capture.jpg"
                 else:
                     capture_file = "capture.png"
-                
+                sleep(1)
                 picam2.capture_file(capture_file)
 
                 if int(CMD[3]) or int(CMD[4]) or int(CMD[5]):
