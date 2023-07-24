@@ -61,8 +61,10 @@ while True:
                 full_res = picam2.camera_properties['PixelArraySize']
                 zoom_size = [int(r * (1 - int(CMD[6]) / 100)) for r in full_res]
                 offset = [(r - s) // 2 for r, s in zip(full_res, zoom_size)]
-
-                picam2.set_controls({"AfMode": controls.AfModeEnum.Manual, "LensPosition": 100/lens_position})
+                if(lens_position != 0):
+                    picam2.set_controls({"AfMode": controls.AfModeEnum.Manual, "LensPosition": 100/lens_position})
+                else:
+                    picam2.set_controls({"AfMode": controls.AfModeEnum.Manual, "LensPosition": 0})
                 picam2.capture_metadata()
                 picam2.set_controls({"ScalerCrop": offset + zoom_size})
                 picam2.capture_metadata()
